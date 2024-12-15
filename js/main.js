@@ -1,7 +1,4 @@
-/* ===================================================================
- * Luther 1.0.0 - Main JS
- *
- * ------------------------------------------------------------------- */
+
 
 (function(html) {
 
@@ -11,8 +8,6 @@
 
 
 
-   /* Animations
-    * -------------------------------------------------- */
     const tl = anime.timeline( {
         easing: 'easeInOutCubic',
         duration: 800,
@@ -66,9 +61,6 @@
     }, '-=800');
 
 
-
-   /* Preloader
-    * -------------------------------------------------- */
     const ssPreloader = function() {
 
         const preloader = document.querySelector('#preloader');
@@ -85,16 +77,12 @@
             tl.play();
         });
 
-        // force page scroll position to top at page refresh
-        // window.addEventListener('beforeunload' , function () {
-        //     // window.scrollTo(0, 0);
-        // });
+       
 
-    }; // end ssPreloader
+    }; 
 
 
-   /* Mobile Menu
-    * ---------------------------------------------------- */ 
+
     const ssMobileMenu = function() {
 
         const toggleButton = document.querySelector('.mobile-menu-toggle');
@@ -112,7 +100,7 @@
         mainNavWrap.querySelectorAll('.main-nav a').forEach(function(link) {
             link.addEventListener("click", function(event) {
 
-                // at 800px and below
+               
                 if (window.matchMedia('(max-width: 800px)').matches) {
                     toggleButton.classList.toggle('is-clicked');
                     siteBody.classList.toggle('menu-is-open');
@@ -122,43 +110,32 @@
 
         window.addEventListener('resize', function() {
 
-            // above 800px
+        
             if (window.matchMedia('(min-width: 801px)').matches) {
                 if (siteBody.classList.contains('menu-is-open')) siteBody.classList.remove('menu-is-open');
                 if (toggleButton.classList.contains("is-clicked")) toggleButton.classList.remove("is-clicked");
             }
         });
 
-    }; // end ssMobileMenu
-
-
-   /* Highlight active menu link on pagescroll
-    * ------------------------------------------------------ */
+    };
     const ssScrollSpy = function() {
 
         const sections = document.querySelectorAll(".target-section");
 
-        // Add an event listener listening for scroll
+        
         window.addEventListener("scroll", navHighlight);
 
         function navHighlight() {
         
-            // Get current scroll position
+         
             let scrollY = window.pageYOffset;
         
-            // Loop through sections to get height(including padding and border), 
-            // top and ID values for each
+          
             sections.forEach(function(current) {
                 const sectionHeight = current.offsetHeight;
                 const sectionTop = current.offsetTop - 50;
                 const sectionId = current.getAttribute("id");
             
-               /* If our current scroll position enters the space where current section 
-                * on screen is, add .current class to parent element(li) of the thecorresponding 
-                * navigation link, else remove it. To know which link is active, we use 
-                * sectionId variable we are getting while looping through sections as 
-                * an selector
-                */
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                     document.querySelector(".main-nav a[href*=" + sectionId + "]").parentNode.classList.add("current");
                 } else {
@@ -167,11 +144,7 @@
             });
         }
 
-    }; // end ssScrollSpy
-
-
-   /* Animate elements if in viewport
-    * ------------------------------------------------------ */
+    }; 
     const ssViewAnimate = function() {
 
         const blocks = document.querySelectorAll("[data-animate-block]");
@@ -207,11 +180,9 @@
             });
         }
 
-    }; // end ssViewAnimate
+    }; 
 
 
-   /* Swiper
-    * ------------------------------------------------------ */ 
     const ssSwiper = function() {
 
         const mySwiper = new Swiper('.swiper-container', {
@@ -222,17 +193,16 @@
                 clickable: true,
             },
             breakpoints: {
-                // when window width is > 400px
                 401: {
                     slidesPerView: 1,
                     spaceBetween: 20
                 },
-                // when window width is > 800px
+               
                 801: {
                     slidesPerView: 2,
                     spaceBetween: 32
                 },
-                // when window width is > 1200px
+            
                 1201: {
                     slidesPerView: 2,
                     spaceBetween: 80
@@ -240,11 +210,7 @@
             }
          });
 
-    }; // end ssSwiper
-
-
-   /* Lightbox
-    * ------------------------------------------------------ */
+    }; 
     const ssLightbox = function() {
 
         const folioLinks = document.querySelectorAll('.folio-list__item-link');
@@ -256,7 +222,7 @@
                 document.querySelector(modalbox),
                 {
                     onShow: function(instance) {
-                        //detect Escape key press
+                        
                         document.addEventListener("keydown", function(event) {
                             event = event || window.event;
                             if (event.keyCode === 27) {
@@ -276,11 +242,7 @@
             });
         });
 
-    };  // end ssLightbox
-
-
-   /* Alert boxes
-    * ------------------------------------------------------ */
+    };  
     const ssAlertBoxes = function() {
 
         const boxes = document.querySelectorAll('.alert-box');
@@ -300,11 +262,7 @@
 
         })
 
-    }; // end ssAlertBoxes
-
-
-   /* Smoothscroll
-    * ------------------------------------------------------ */
+    }; 
     const ssMoveTo = function(){
 
         const easeFunctions = {
@@ -343,11 +301,9 @@
             moveTo.registerTrigger(trigger);
         });
 
-    }; // end ssMoveTo
+    }; 
 
 
-   /* Initialize
-    * ------------------------------------------------------ */
     (function ssInit() {
 
         ssPreloader();
